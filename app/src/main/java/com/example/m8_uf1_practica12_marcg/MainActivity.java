@@ -8,6 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import androidx.fragment.app.DialogFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
         TextView input = (TextView) findViewById(R.id.numberU);
         TextView log = (TextView) findViewById(R.id.Registry);
+        Modal dialog = new Modal();
 
         Button button = (Button) findViewById(R.id.verify);
         button.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 if (valueUser == number){
                     text = "Nice!! " + valueUser + " is the correct number!!";
                     log.append("Nice!! " + valueUser + " is the correct number!! Tries = " + userTry + "\n");
+
+
                 }
                 else if (valueUser < number){
                     text = "Wrong!! " + valueUser + " is smaller than the number!!";
@@ -50,5 +58,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public class Modal extends DialogFragment {
+
+        String Congrats = "Congratulations!!";
+        String buttonAccept = "Accept";
+
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(Congrats)
+                    .setPositiveButton(buttonAccept, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                        }
+
+                    });
+
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
     }
 }
