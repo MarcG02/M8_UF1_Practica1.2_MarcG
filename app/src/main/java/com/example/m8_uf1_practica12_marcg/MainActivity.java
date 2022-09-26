@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
         TextView input = (TextView) findViewById(R.id.numberU);
         TextView log = (TextView) findViewById(R.id.Registry);
-        Modal dialog = new Modal();
+
 
         Button button = (Button) findViewById(R.id.verify);
         button.setOnClickListener(new View.OnClickListener() {
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 CharSequence text = "";
                 userTry++;
-
+                log.setMovementMethod(new ScrollingMovementMethod());
                 int duration = Toast.LENGTH_SHORT;
                 int valueUser = Integer.valueOf(input.getText().toString());
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 if (valueUser == number){
                     text = "Nice!! " + valueUser + " is the correct number!!";
                     log.append("Nice!! " + valueUser + " is the correct number!! Tries = " + userTry + "\n");
-
+                    Dialog();
 
                 }
                 else if (valueUser < number){
@@ -60,24 +61,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public class Modal extends DialogFragment {
-
+    public void Dialog(){
         String Congrats = "Congratulations!!";
         String buttonAccept = "Accept";
 
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage(Congrats)
-                    .setPositiveButton(buttonAccept, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(Congrats)
+                .setPositiveButton(buttonAccept, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //Start GAME!!
+                    }
 
-                        }
+                });
 
-                    });
-
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
+        // Create the AlertDialog object and return it
+        builder.create().show();
     }
 }
