@@ -15,20 +15,24 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Random;
 
-    @Override
+public class MainActivity extends AppCompatActivity {
+    private int userTry = 0;
+    private int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    private TextView log;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
+
         TextView input = (TextView) findViewById(R.id.numberU);
-        TextView log = (TextView) findViewById(R.id.Registry);
+        log = (TextView) findViewById(R.id.Registry);
 
 
         Button button = (Button) findViewById(R.id.verify);
         button.setOnClickListener(new View.OnClickListener() {
-            int userTry = 0;
+
             public void onClick(View v) {
                 CharSequence text = "";
                 userTry++;
@@ -64,17 +68,30 @@ public class MainActivity extends AppCompatActivity {
     public void Dialog(){
         String Congrats = "Congratulations!!";
         String buttonAccept = "Accept";
-
+        String cancel = "Cancel";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(Congrats)
                 .setPositiveButton(buttonAccept, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //Start GAME!!
+                        playAgain();
+
                     }
 
+                }).setNegativeButton(cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
                 });
 
         // Create the AlertDialog object and return it
         builder.create().show();
+    }
+
+    public void playAgain(){
+        Random rand = new Random();
+        userTry = 0;
+        number = rand.nextInt(100);
+        log.setText("");
     }
 }
