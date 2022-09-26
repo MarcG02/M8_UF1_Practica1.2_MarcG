@@ -3,10 +3,12 @@ package com.example.m8_uf1_practica12_marcg;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.AlertDialog;
@@ -28,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         TextView input = (TextView) findViewById(R.id.numberU);
         log = (TextView) findViewById(R.id.Registry);
-
 
         Button button = (Button) findViewById(R.id.verify);
         button.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button recordB = (Button) findViewById(R.id.records);
+        recordB.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent rankIntent = new Intent(MainActivity.this, Records.class);
+                startActivity(rankIntent);
+            }
+        });
 
     }
 
@@ -70,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         String buttonAccept = "Accept";
         String cancel = "Cancel";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText input = new EditText(this);
+        builder.setView(input);
+
         builder.setMessage(Congrats)
                 .setPositiveButton(buttonAccept, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

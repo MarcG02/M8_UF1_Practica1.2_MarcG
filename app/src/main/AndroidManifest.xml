@@ -14,6 +14,9 @@
         android:theme="@style/Theme.M8_UF1_Practica12_MarcG"
         tools:targetApi="31">
         <activity
+            android:name=".Records"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
