@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View view) {
                 Intent rankIntent = new Intent(MainActivity.this, Records.class);
+                rankIntent.putExtra("users", userList);
                 startActivity(rankIntent);
+
             }
         });
 
@@ -81,14 +84,15 @@ public class MainActivity extends AppCompatActivity {
         String buttonAccept = "Accept";
         String cancel = "Cancel";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
         final EditText input = new EditText(this);
         builder.setView(input);
 
         builder.setMessage(Congrats)
                 .setPositiveButton(buttonAccept, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //Start GAME!!
-                        playAgain();
+                        //ReStart GAME!!
+                        playAgain(String.valueOf(input.getText()));
 
                     }
 
@@ -102,8 +106,9 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    public void playAgain(){
+    public void playAgain(String text){
         Random rand = new Random();
+        userList.add(new Users(text,userTry));
         userTry = 0;
         number = rand.nextInt(100);
         log.setText("");
