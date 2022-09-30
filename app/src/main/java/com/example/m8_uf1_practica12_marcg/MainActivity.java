@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    //Metode de dialeg
     public void Dialog(){
         String Congrats = "Congratulations!!";
         String buttonAccept = "Accept";
