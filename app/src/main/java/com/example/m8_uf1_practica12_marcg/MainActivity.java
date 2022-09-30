@@ -17,12 +17,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.fragment.app.DialogFragment;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     private int userTry = 0;
     private int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
     private TextView log;
+    private ArrayList<Users> userList = new ArrayList<Users>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
