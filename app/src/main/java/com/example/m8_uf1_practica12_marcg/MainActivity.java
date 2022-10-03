@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -24,8 +25,9 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private int userTry = 0;
     private int number = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
-    private TextView log;
+    private TextView log, Timer;
     private ArrayList<Users> userList = new ArrayList<Users>();
+    private int TimerCont = 0;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,5 +114,13 @@ public class MainActivity extends AppCompatActivity {
         userTry = 0;
         number = rand.nextInt(100);
         log.setText("");
+    }
+
+    public void Timer_controller(){
+        Timer = (TextView) findViewById(R.id.TimerView);
+        TimerCont ++;
+        Timer.setText(String.valueOf(TimerCont));
+
+
     }
 }
